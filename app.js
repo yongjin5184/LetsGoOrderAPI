@@ -1,10 +1,13 @@
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+var ejs = require('ejs');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
 var index = require('./routes/index');
-var restaurants = require('./routes/restaurants');
+var restaurants = require('./routes/api/restaurants');
+var home = require('./routes/views/home');
 
 var app = express();
 
@@ -13,9 +16,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// set view
+app.set('views', __dirname + '/views');
+app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);
 
+//set route
 app.use('/', index);
-app.use('/restaurants', restaurants);
+app.use('/api/restaurants', restaurants);
+app.use('/views/home', home);
 
 
 // catch 404 and forward to error handler
