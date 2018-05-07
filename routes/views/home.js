@@ -17,9 +17,7 @@ var station_name = "종로구";
 var sido_name = "jongro";
 var encoded_station_name = encodeURI(station_name);
 
-console.log(encoded_station_name);
 // 날짜 구하기
-
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth() + 1; //January is 0!
@@ -45,16 +43,8 @@ var options = {
 	encoding:"UTF-8",
 };
 
-
-
-
 var request = request(options, function(err, res, body){
 	if (err) { return console.log(err); }
-	console.log('요청후, 데이터 삽입');
-	
-	// 데이터 삽입
-	// client.hset(today + ":seongbuk", "a", "1");
-	// client.hset(today + ":seongbuk", "b", "2");
 	
 	var data_list = body['list'];
 	var parm = body['parm'];
@@ -69,8 +59,6 @@ var request = request(options, function(err, res, body){
 	var pm25Value = data_list[0]['pm25Value']; //미세먼지 농도
 	var pm25Value24 = data_list[0]['pm25Value24']; //미세먼지 24시간 예측이동 농도
 
-	// console.log(body['list']);
-	// console.log(data_list[0]['pm25Grade']);
 	client.hset(today + ":" + sido_name, 'pm10Grade', pm10Grade);
 	client.hset(today + ":" + sido_name, 'pm10Grade1h', pm10Grade1h);
 	client.hset(today + ":" + sido_name, 'pm10Value', pm10Value);
