@@ -34,7 +34,7 @@ if(hh < 10)
 
 today = yyyy + mm + dd + hh;
 
-// client.hset(today + ":seongbuk", "pm10Grade", "1");
+client.hset(today + ":seongbuk", "pm10Grade", "1");
 
 var options = {
 	url : 'http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=' + encoded_station_name + '&dataTerm=daily&pageNo=1&numOfRows=1&ServiceKey=HfwoMWjEXZ%2FxxrKKfH%2FdjJNpMUpwXImRpAUHcRxH5219TkZTSrEKUcny%2F4WcVRiDUDw9eC1YQbAIbuFoAqJebQ%3D%3D&ver=1.3&_returnType=json&sidoName=' + sido_name,
@@ -46,6 +46,8 @@ var options = {
 var request = request(options, function(err, res, body){
 	if (err) { return console.log(err); }
 	
+	client.hset(today + ":Gwanak", "pm10Grade", "1");
+
 	var data_list = body['list'];
 	var parm = body['parm'];
 	//PM10
