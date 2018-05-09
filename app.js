@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var restaurants = require('./routes/api/restaurants');
-// var home = require('./routes/views/home');
+var home = require('./routes/views/home');
 
 var app = express();
 
@@ -24,12 +24,7 @@ app.engine('html', require('ejs').renderFile);
 //set route
 app.use('/', index);
 app.use('/api/restaurants', restaurants);
-// app.use('/views/home', home);
-app.get('/views/home', function (req, res) {
-  var home = require('./routes/views/home');
-  res.end("요청 성공!");
-});
-
+app.use('/views/home', home);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
