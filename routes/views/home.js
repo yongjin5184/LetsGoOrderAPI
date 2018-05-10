@@ -14,10 +14,6 @@ var client = redis.createClient({host : '127.0.0.1', port : 6379});
 //     'Content-Type':     "application/json;charset=utf-8"	
 // };
 
-
-
-
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	var station_name = "종로구";
