@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "nodemon_start": "nodemon ./bin/www",
+    "start": "forever start --minUptime 1000 --spinSleepTime 1000 ./bin/www",
+    "stop" : "forever stop ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
